@@ -1,0 +1,58 @@
+<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+  <div class="form-group required">
+    <label>Username</label>
+    <input class="form-control loginform" formControlName="UserName">
+    <label class="text-danger"
+      *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">This field
+      is mandatory.</label>
+  </div>
+  <div class="form-group required">
+    <label>Nume</label>
+    <input class="form-control loginform" formControlName="Nume">
+    <label class="text-danger"
+      *ngIf="service.formModel.get('Nume').touched && service.formModel.get('Nume').errors?.required">This field is
+      mandatory.</label>
+  </div>
+  <div class="form-group required">
+    <label>Prenume</label>
+    <input class="form-control loginform" formControlName="Prenume">
+    <label class="text-danger"
+      *ngIf="service.formModel.get('Prenume').touched && service.formModel.get('Prenume').errors?.required">This field
+      is mandatory.</label>
+  </div>
+  <div formGroupName="Passwords">
+    <div class="form-group required">
+      <label>Password</label>
+      <input type="password" class="form-control loginform" formControlName="Password">
+      <label class="text-danger"
+        *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">This
+        field is mandatory.</label>
+      <label class="text-danger"
+        *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Minimum
+        6 characters required.</label>
+    </div>
+    <div class="form-group required">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control loginform" formControlName="ConfirmPassword">
+      <label class="text-danger"
+        *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">This
+        field is mandatory.</label>
+      <label class="text-danger"
+        *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Password
+        does not match.</label>
+    </div>
+  </div>
+  <div class="form-group required ">
+    <label>Data nasterii</label>
+    <ejs-datepicker allowEdit="true" formControlName="ZiuaNastere"></ejs-datepicker>
+    <label class="text-danger"
+      *ngIf="service.formModel.get('ZiuaNastere').touched && service.formModel.get('ZiuaNastere').errors?.required">This
+      field is mandatory.</label>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8 offset-md-2">
+      <button type="submit" id="loginbutton" class="btn loginbutton btn-lg btn-block"
+        [disabled]="!service.formModel.valid">Sign Up</button>
+    </div>
+  </div>
+</form>

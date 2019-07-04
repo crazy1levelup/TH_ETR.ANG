@@ -1,0 +1,153 @@
+<div class="card m-5" style="width: 18rem" *ngIf="userDetails">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Nume: </strong>{{userDetails.nume}}</li>
+    <li class="list-group-item"><strong>Prenume: </strong>{{userDetails.prenume}}</li>
+    <li class="list-group-item"><strong>Data Nasterii: </strong>{{userDetails.ziuaNastere | date: 'dd/MM/yyyy'}}</li>
+    <li class="list-group-item"><strong>Data Inregistrare:
+      </strong>{{userDetails.dataInregistrare | date: 'dd/MM/yyyy'}}</li>
+    <li class="list-group-item"><strong>Notes: </strong>{{userDetails.notes}} <a class="float-right"
+        data-target="#exampleModal" style="cursor: pointer" data-toggle="modal" aria-haspopup="true"
+        aria-expanded="false"><i class="fas fa-edit"></i>
+      </a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Notes</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #form="ngForm" (submit)="editUser(form)">
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Notes:</label>
+                  <textarea #Notes="ngModel" name="Notes" [(ngModel)]="userFormModel.Notes" class="form-control"
+                    id="message-text" required></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn pacientibutton" [disabled]="form.invalid">Edit Notes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <table class="table table-striped ">
+    <thead>
+      <tr>
+        <th *ngFor="let col of pacientiHeader">{{col}}</th>
+        <th><span><i class="fas fa-plus-circle" data-target="#addModal" data-toggle="modal" aria-haspopup="true"
+              aria-expanded="false"></i></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pacienti of pacientiDetails">
+        <td *ngFor="let col of pacientiKey">
+          {{pacienti[col]}}
+        </td>
+        <td>
+          <span>
+            <span><i class="fas fa-edit" (click)="onePacient(pacienti.id)" data-target="#editModal" value="pacienti.id"
+                data-toggle="modal" aria-haspopup="true" aria-expanded="false"></i></span>
+          </span>
+          <span class="float-right">
+            <span (click)="deletePacient(pacienti.id)"><i class="fas fa-times-circle" value="pacienti.id"></i></span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Adaugare Pacient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addPacientiForm="ngForm" (submit)="addPacient(addPacientiForm)">
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Nume:</label>
+            <input #Nume="ngModel" name="Nume" [(ngModel)]="addPacientiFormModel.Nume" class="form-control pacientiform"
+              id="message-text" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Prenume:</label>
+            <input #Prenume="ngModel" name="Prenume" [(ngModel)]="addPacientiFormModel.Prenume"
+              class="form-control pacientiform" id="message-text" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Data Nasterii:</label>
+            <ejs-datepicker locale="ro" format='dd-MM-yyyy' #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
+              [(ngModel)]="addPacientiFormModel.ZiuaNastere" required></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Notes:</label>
+            <textarea #Notes="ngModel" name="Notes" [(ngModel)]="addPacientiFormModel.Notes" class="form-control"
+              id="message-text" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn pacientibutton" [disabled]="addPacientiForm.invalid">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editare Pacient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #pacientiForm="ngForm" (submit)="editPacient(pacientiForm)">
+          <div class="form-group">
+            <input #id="ngModel" name="id" [(ngModel)]="pacientiFormModel.id" type="hidden">
+            <input #DataInregistrare="ngModel" name="DataInregistrare" [(ngModel)]="pacientiFormModel.DataInregistrare"
+              type="hidden">
+            <label for="message-text" class="col-form-label">Nume:</label>
+            <input #Nume="ngModel" name="Nume" [(ngModel)]="pacientiFormModel.Nume" class="form-control pacientiform"
+              id="message-text" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Prenume:</label>
+            <input #Prenume="ngModel" name="Prenume" [(ngModel)]="pacientiFormModel.Prenume"
+              class="form-control pacientiform" id="message-text" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Data Nasterii:</label>
+            <ejs-datepicker locale="ro" format="dd-MM-yyyy" #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
+              [(ngModel)]="pacientiFormModel.ZiuaNastere"></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Notes:</label>
+            <textarea #Notes="ngModel" name="Notes" [(ngModel)]="pacientiFormModel.Notes" class="form-control"
+              id="message-text" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn pacientibutton" [disabled]="pacientiForm.invalid">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

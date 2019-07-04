@@ -1,0 +1,9 @@
+span {
+    cursor: pointer
+}
+
+textarea,textarea:focus{
+    background-color: #6c757d;
+    color: rgb(255, 255, 255);
+    border: 1px solid #6c757d;
+}
