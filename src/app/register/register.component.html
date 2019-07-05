@@ -44,7 +44,7 @@
   </div>
   <div class="form-group required ">
     <label>Data nasterii</label>
-    <ejs-datepicker allowEdit="true" formControlName="ZiuaNastere"></ejs-datepicker>
+    <ejs-datepicker [cssClass]='cssClass' allowEdit="true" formControlName="ZiuaNastere"></ejs-datepicker>
     <label class="text-danger"
       *ngIf="service.formModel.get('ZiuaNastere').touched && service.formModel.get('ZiuaNastere').errors?.required">This
       field is mandatory.</label>

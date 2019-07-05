@@ -40,26 +40,37 @@
 </div>
 
 <div>
-  <table class="table table-striped ">
+  <form #searchForm="ngForm" (submit)="searchPacienti()" class="form-inline">
+    <input class="form-control pacientiform" type="search" [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
+      placeholder="Search" aria-label="Search">
+    <button class="btn pacientibutton btn-outline-dark" type="submit">Search</button>
+  </form>
+</div>
+
+<div >
+  <table class="table">
     <thead>
       <tr>
-        <th *ngFor="let col of pacientiHeader">{{col}}</th>
-        <th><span><i class="fas fa-plus-circle" data-target="#addModal" data-toggle="modal" aria-haspopup="true"
+        <th  *ngFor="let col of pacientiHeader">{{col}}</th>
+        <th ><span><i class="fas fa-plus-circle" data-target="#addModal" data-toggle="modal" aria-haspopup="true"
               aria-expanded="false"></i></span></th>
+        <th ></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pacienti of pacientiDetails">
-        <td *ngFor="let col of pacientiKey">
-          {{pacienti[col]}}
-        </td>
+      <tr class="table-secondary" *ngFor="let pacienti of pacientiDetails">
+              <td *ngFor="let col of pacientiKey">
+                        {{pacienti[col]}}
+                </td>
         <td>
           <span>
-            <span><i class="fas fa-edit" (click)="onePacient(pacienti.id)" data-target="#editModal" value="pacienti.id"
-                data-toggle="modal" aria-haspopup="true" aria-expanded="false"></i></span>
+            <span (click)="onePacient(pacienti.id)" data-target="#editModal" data-toggle="modal" aria-haspopup="true"
+              aria-expanded="false"><i class="fas fa-edit"></i></span>
           </span>
+        </td>
+        <td>
           <span class="float-right">
-            <span (click)="deletePacient(pacienti.id)"><i class="fas fa-times-circle" value="pacienti.id"></i></span>
+            <span (click)="deletePacient(pacienti.id)"><i class="fas fa-times-circle"></i></span>
           </span>
         </td>
       </tr>
@@ -90,7 +101,7 @@
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Data Nasterii:</label>
-            <ejs-datepicker locale="ro" format='dd-MM-yyyy' #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
+            <ejs-datepicker [cssClass]='cssClass' format='dd-MM-yyyy' #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
               [(ngModel)]="addPacientiFormModel.ZiuaNastere" required></ejs-datepicker>
           </div>
           <div class="form-group">
@@ -134,7 +145,7 @@
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Data Nasterii:</label>
-            <ejs-datepicker locale="ro" format="dd-MM-yyyy" #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
+            <ejs-datepicker [cssClass]='cssClass' format="dd-MM-yyyy" #ZiuaNastere="ngModel" name="ZiuaNastere" id='datepicker'
               [(ngModel)]="pacientiFormModel.ZiuaNastere"></ejs-datepicker>
           </div>
           <div class="form-group">

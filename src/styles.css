@@ -1,34 +1,41 @@
 body{
-    background-color: #6d6d6d;
+  /* background: linear-gradient(217deg, rgba(175, 175, 175, 0.8), rgba(58, 248, 255, 0) 70.71%),
+            linear-gradient(127deg, rgba(72, 175, 167, 0.8), rgba(29, 92, 89, 0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%); */
+            background: url("https://media.tarkett-image.com/large-high/IN_HP_Venetto_xf2_2mm_148716638_001.jpg"); 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
 }
 
+.list-group-item{
+    background: #cccccc;
+}
 input.form-control.loginform,input.form-control.loginform:focus{
     background-color: #6c757d;
     color: rgb(255, 255, 255);
-    border: 1px solid #6c757d;
+    border: 1px solid #000000;
 
 }
 
 input.form-control.pacientiform,input.form-control.pacientiform:focus{
     background-color: #6c757d;
     color: rgb(255, 255, 255);
-    border: 1px solid #6c757d;
+    border: 1px solid #000000;
 
 }
 input.form-control:focus{
     box-shadow: none;
 }
-.datepicker {
 
-    color: rgb(255, 0, 0);
-}
 button.btn.pacientibutton{
-    background-color: #81592b;
+    background-color: #535353;
     color: white
 }
 button.btn.loginbutton{
     border-radius: 20px;
-    background-color: #81592b;
+    background-color: #535353;
     color: rgb(0, 0, 0);
 }
 
@@ -61,9 +68,10 @@ div.form-group.required>label:first-child:after{
     background: #cccccc;
   }
   .modal-header {
-    background: #81592b;
+    background: #535353;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    color: white
     
   }
   button.close {
@@ -120,17 +128,46 @@ div.form-group.required>label:first-child:after{
     font-size: 0.9rem;
  }
  thead {
-     background: #81592b
+     background: #cccccc
  }
  .table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid black;
+    
   }
   .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid  black;
     border-top: 2px solid  black;
+
+  }
+  .table {
+    margin-bottom: 0;
   }
   
-  
+
+  /*calendar*/
+  .e-input-group.e-date-wrapper.e-custom-style:not(.e-float-icon-left)::before, /* csslint allow: adjoining-classes*/
+.e-input-group.e-date-wrapper.e-custom-style:not(.e-float-icon-left)::after /* csslint allow: adjoining-classes*/
+{ /* csslint allow: adjoining-classes*/
+    background: #6c757d;
+}
+
+.e-date-wrapper.e-custom-style input.e-input::selection { /* csslint allow: adjoining-classes*/
+    background:#535353;
+}
+.e-date-wrapper.e-custom-style input.e-input::-moz-selection { /* csslint allow: adjoining-classes*/
+    background: #535353;
+}
+
+
+.e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons, /* csslint allow: adjoining-classes*/
+.e-date-wrapper.e-custom-style .e-input { /* csslint allow: adjoining-classes*/
+    color: #6c757d;
+}
+
+.e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons.e-active {  /* csslint allow: adjoining-classes*/
+    color:#535353;
+}
+

@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  public cssClass: string = 'e-custom-style';
   constructor(public service: UserService, private router: Router) { }
 
   ngOnInit() {
-
     this.service.formModel.reset()
   }
 

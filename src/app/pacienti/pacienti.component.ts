@@ -15,6 +15,9 @@ import { registerLocaleData } from '@angular/common';
   styleUrls: ['./pacienti.component.css']
 })
 export class PacientiComponent implements OnInit {
+  public cssClass: string = 'e-custom-style';
+
+
   userDetails;
   userFormModel = {
     Notes: ''
@@ -34,12 +37,13 @@ export class PacientiComponent implements OnInit {
     ZiuaNastere: '',
     Notes: ''
   }
-
+  search='';
   pacientiDetails = [];
   pacientiHeader = ["Id", "Nume", "Prenume", "Data Nasterii", "Data Inregistrarii", "Notes"]
   pacientiKey = [];
-  constructor(private service: UserService, private route: Router) { }
 
+
+  constructor(private service: UserService, private route: Router) { }
   ngOnInit() {
 
     this.service.getUserProfile().subscribe(res => {
@@ -53,7 +57,7 @@ export class PacientiComponent implements OnInit {
         console.log(err)
       }
     )
-    this.service.getPacienti().subscribe(res => {
+    this.service.getPacienti(this.search).subscribe(res => {
     this.pacientiDetails = res;
       console.log(this.pacientiDetails)
       this.pacientiKey = Object.keys(this.pacientiDetails[0]);
@@ -100,8 +104,6 @@ export class PacientiComponent implements OnInit {
     var onePacientId = this.unPacient[0].id;
     form.value.ZiuaNastere = formatDate(this.pacientiFormModel.ZiuaNastere, 'MM-dd-yyyy', 'ro')
     console.log(form.value)
-    // var some = formatDate( this.pacientiFormModel.ZiuaNastere, "dd-MM-yyyy", "ro");
-    // console.log(some)
     this.service.putPacienti(form.value, onePacientId).subscribe(res => { console.log(res); location.reload(); });
   }
 
@@ -110,4 +112,16 @@ export class PacientiComponent implements OnInit {
     console.log(form.value)
     this.service.postPacienti(form.value).subscribe(res => { console.log(res); location.reload(); })
   }
+
+  searchPacienti(){
+    console.log(this.search)
+    this.service.getPacienti(this.search).subscribe(res => {
+      this.pacientiDetails = res;
+        console.log(this.pacientiDetails)
+        if(this.pacientiDetails === []){
+          this.pacientiKey = Object.keys(this.pacientiDetails[0]);
+        }
+      })
+  }
+
 }

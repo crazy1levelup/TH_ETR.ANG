@@ -62,8 +62,8 @@ export class UserService {
 
   }
 
-  getPacienti(): Observable<Pacienti[]> {
-    return this.http.get<Pacienti[]>(this.BaseURI + '/Pacientis')
+  getPacienti(search): Observable<Pacienti[]> {
+    return this.http.get<Pacienti[]>(this.BaseURI + '/Pacientis?search='+ search)
       .pipe(
         map((data: any[]) => data.map((item: any) => new Pacienti(
           item.id,
